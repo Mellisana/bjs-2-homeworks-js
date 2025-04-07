@@ -19,6 +19,7 @@ function solveEquation(a, b, c) {
 }
 
 
+"use strict";
 function calculateTotalMortgage(annualInterestRate, initialContribution, loanAmount, months) {
   // Переводим годовую процентную ставку в месячную
   const monthlyInterestRate = annualInterestRate / 1200;
@@ -37,8 +38,8 @@ function calculateTotalMortgage(annualInterestRate, initialContribution, loanAmo
     monthlyInterestRate / ((1 + monthlyInterestRate) ** months - 1)
   );
 
-  // Округляем ежемесячный платёж до двух знаков после запятой
-  const roundedMonthlyPayment = Number((monthlyPayment).toFixed(2));
+  // Округляем ежемесячный платёж до копеек
+  const roundedMonthlyPayment = Math.round(monthlyPayment * 100) / 100;
 
   // Рассчитываем общую сумму выплат
   const totalPayments = roundedMonthlyPayment * months;
