@@ -20,29 +20,33 @@ function solveEquation(a, b, c) {
 
 
 "use strict";
-function calculateTotalMortgage(annualInterestRate, initialContribution, loanAmount, months) {
-  // Переводим годовую процентную ставку в месячную
-  const monthlyInterestRate = annualInterestRate / 1200;
+function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+  // Преобразуем процентную ставку из процентов в десятичную форму
+  const interestRate = percent / 100;
 
-  // Рассчитываем основной долг (сумма кредита минус первоначальный взнос)
-  const principal = loanAmount - initialContribution;
+  // Рассчитываем месячную процентную ставку
+  const monthlyInterestRate = interestRate / 12;
+
+  // Рассчитываем тело кредита (сумма кредита минус первоначальный взнос)
+  const principal = amount - contribution;
 
   // Если весь кредит погашен взносом, возвращаем 0
   if (principal <= 0) {
     return 0;
   }
 
-  // Рассчитываем ежемесячный платёж по аннуитетной схеме
+  // Рассчитываем ежемесячный платеж по аннуитетной схеме
   const monthlyPayment = principal * (
     monthlyInterestRate +
-    monthlyInterestRate / ((1 + monthlyInterestRate) ** months - 1)
+    monthlyInterestRate / ((1 + monthlyInterestRate) ** countMonths - 1)
   );
 
-  // Округляем ежемесячный платёж до копеек
-  const roundedMonthlyPayment = Math.round(monthlyPayment * 100) / 100;
+  // Округляем ежемесячный платеж до четырех знаков после запятой
+  const roundedMonthlyPayment = Number((monthlyPayment).toFixed(4));
 
   // Рассчитываем общую сумму выплат
-  const totalPayments = roundedMonthlyPayment * months;
+  const totalPayments = roundedMonthlyPayment * countMonths;
 
-  return totalPayments;
+  // Возвращаем итоговое значение, округленное до двух знаков после запятой
+  return Number(totalPayments.toFixed(2));
 }
