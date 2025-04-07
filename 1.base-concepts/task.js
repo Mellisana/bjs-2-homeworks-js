@@ -21,7 +21,6 @@ function solveEquation(a, b, c) {
 
 "use strict";
 
-// Функция для подсчёта общей суммы ипотечного кредита
 function calculateTotalMortgage(annualInterestRate, initialContribution, loanAmount, months) {
   // Переводим годовую процентную ставку в месячную
   const monthlyInterestRate = annualInterestRate / 1200;
@@ -41,19 +40,10 @@ function calculateTotalMortgage(annualInterestRate, initialContribution, loanAmo
   );
 
   // Округляем ежемесячный платёж до двух знаков после запятой
-  const roundedMonthlyPayment = Math.round(monthlyPayment * 100) / 100;
+  const roundedMonthlyPayment = parseFloat(monthlyPayment.toFixed(2));
 
   // Рассчитываем общую сумму выплат
   const totalPayments = roundedMonthlyPayment * months;
 
   return totalPayments;
 }
-
-// Примеры использования
-console.log(calculateTotalMortgage(10, 0, 50000, 12));        // 52749.53
-console.log(calculateTotalMortgage(10, 1000, 50000, 12));     // 51694.54
-console.log(calculateTotalMortgage(10, 0, 20000, 24));        // 22149.56
-console.log(calculateTotalMortgage(10, 1000, 20000, 24));     // 21042.09
-console.log(calculateTotalMortgage(10, 20000, 20000, 24));    // 0
-console.log(calculateTotalMortgage(10, 0, 10000, 36));        // 11616.19
-console.log(calculateTotalMortgage(15, 0, 10000, 36));        // 12479.52
