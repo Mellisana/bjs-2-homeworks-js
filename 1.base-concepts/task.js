@@ -19,7 +19,7 @@ function solveEquation(a, b, c) {
 }
 
 
-"use strict";
+// Функция подсчета ипотечного кредитования  Платёж = S * (P + (P / (((1 + P)^n) - 1)))
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
   // Преобразуем процентную ставку из процентов в десятичную форму
   const interestRate = percent / 100;
@@ -27,15 +27,15 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
   // Рассчитываем месячную процентную ставку
   const monthlyInterestRate = interestRate / 12;
 
-  // Рассчитываем тело кредита (сумма кредита минус первоначальный взнос)
+  // Рассчитываем тело кредита (сумма кредита - первоначальный взнос)
   const principal = amount - contribution;
 
-  // Если весь кредит погашен взносом, возвращаем 0
+  // Если весь кредит погашен, возвращаем 0
   if (principal <= 0) {
     return 0;
   }
 
-  // Рассчитываем ежемесячный платеж по аннуитетной схеме
+  // Рассчитываем ежемесячный платеж
   const monthlyPayment = principal * (
     monthlyInterestRate +
     monthlyInterestRate / ((1 + monthlyInterestRate) ** countMonths - 1)
@@ -47,6 +47,6 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
   // Рассчитываем общую сумму выплат
   const totalPayments = roundedMonthlyPayment * countMonths;
 
-  // Возвращаем итоговое значение, округленное до двух знаков после запятой
+  // Возвращаем значение, округленное до двух знаков после запятой
   return Number(totalPayments.toFixed(2));
 }
